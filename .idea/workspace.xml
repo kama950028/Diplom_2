@@ -5,12 +5,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51a73a4e-9835-473a-a300-ecb7ed21265e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/BaseTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/client/OrderClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/client/UserClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/tests/AuthLoginTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/tests/AuthRegisterTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/tests/OrderCreateTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/util/Data.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/util/Ingredients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/praktikum/tests/stellarburgers/util/Tokens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/praktikum/Bun.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/praktikum/Burger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/praktikum/Database.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/praktikum/Ingredient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/praktikum/IngredientType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/praktikum/Praktikum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/praktikum/tests/burgertests/BurgerCoreTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/praktikum/tests/burgertests/BurgerMoveEdgeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/praktikum/tests/burgertests/BurgerPriceParamTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/2befd99e-f428-4151-9127-24bfea1d5e10-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/48f1efa3-9825-4f19-8dad-013c6a72ed67-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/6828828d-c8eb-414c-b952-1ecd286e92a4-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/92bae3fe-b339-4412-9a3c-bf7986e5f772-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/9395975e-fc97-43f0-9989-96b28c607fb0-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/c654a1e5-b97f-4726-b5ec-8f16c3da4fe4-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/dd2e876a-f8cd-42d5-b780-d2de2b0cf9e3-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/e5a0ad27-90b5-4464-b865-720e6699c028-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/praktikum/Bun.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/praktikum/Burger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/praktikum/Database.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/praktikum/Ingredient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/praktikum/IngredientType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/praktikum/Praktikum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/jacoco.exec" beforeDir="false" afterPath="$PROJECT_DIR$/target/jacoco.exec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-praktikum.tests.burgertests.BurgerCoreTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-praktikum.tests.burgertests.BurgerMoveEdgeTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-praktikum.tests.burgertests.BurgerPriceParamTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/praktikum.tests.burgertests.BurgerCoreTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/praktikum.tests.burgertests.BurgerMoveEdgeTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/praktikum.tests.burgertests.BurgerPriceParamTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/praktikum/tests/burgertests/BurgerCoreTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/praktikum/tests/burgertests/BurgerMoveEdgeTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/praktikum/tests/burgertests/BurgerPriceParamTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,12 +66,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kama950028/Diplom_2.git",
-    "accountId": "92402bd1-d819-40e5-86c2-5066ecdea122"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kama950028/Diplom_2.git&quot;,
+    &quot;accountId&quot;: &quot;92402bd1-d819-40e5-86c2-5066ecdea122&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -40,10 +86,16 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "develop2",
-    "last_opened_file_path": "C:/cygwin64/yandex/Diplom_2",
+    "last_opened_file_path": "/Users/anatoliy/Documents/Diplom_2",
     "onboarding.tips.debug.path": "C:/cygwin64/yandex/Diplom_2/src/main/java/org/example/Main.java"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/test/java/praktikum/tests" />
+    </key>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="51a73a4e-9835-473a-a300-ecb7ed21265e" name="Changes" comment="" />

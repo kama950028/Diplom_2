@@ -1,3 +1,10 @@
-C:\cygwin64\yandex\Diplom_2\src\test\java\praktikum\tests\burgertests\BurgerCoreTest.java
-C:\cygwin64\yandex\Diplom_2\src\test\java\praktikum\tests\burgertests\BurgerMoveEdgeTest.java
-C:\cygwin64\yandex\Diplom_2\src\test\java\praktikum\tests\burgertests\BurgerPriceParamTest.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/BaseTest.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/client/OrderClient.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/client/UserClient.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/model/User.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/tests/AuthLoginTests.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/tests/AuthRegisterTests.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/tests/OrderCreateTests.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/util/Data.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/util/Ingredients.java
+/Users/anatoliy/Documents/Diplom_2/src/test/java/praktikum/tests/stellarburgers/util/Tokens.java
