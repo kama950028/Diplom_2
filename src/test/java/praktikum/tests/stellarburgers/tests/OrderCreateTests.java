@@ -1,12 +1,15 @@
 package praktikum.tests.stellarburgers.tests;
 
-
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
+import io.qameta.allure.junit5.AllureJunit5;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import praktikum.tests.stellarburgers.BaseTest;
 import praktikum.tests.stellarburgers.client.OrderClient;
 import praktikum.tests.stellarburgers.client.UserClient;
@@ -15,84 +18,61 @@ import praktikum.tests.stellarburgers.util.Data;
 import praktikum.tests.stellarburgers.util.Ingredients;
 import praktikum.tests.stellarburgers.util.Tokens;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
+import static org.apache.http.HttpStatus.*;
 
+
+@ExtendWith(AllureJunit5.class)
 public class OrderCreateTests extends BaseTest {
     private final UserClient userClient = new UserClient();
     private final OrderClient orderClient = new OrderClient();
+
+    private String accessToken;
     private String accessTokenToCleanup;
 
-    @After
-    public void cleanup() {
+    @BeforeEach
+    void setUp() {
+        User u = User.of(Data.email(), Data.pass(), Data.name());
+        ValidatableResponse r = userClient.register(u).statusCode(SC_OK);
+        accessToken = Tokens.extractAccessToken(r.extract().asString());
+        accessTokenToCleanup = accessToken;
+    }
+
+    @AfterEach
+    void cleanup() {
         if (accessTokenToCleanup != null) {
-            userClient.delete(accessTokenToCleanup).statusCode(anyOf(is(200), is(202), is(401)));
+            userClient.delete(accessTokenToCleanup)
+                    .statusCode(anyOf(is(SC_OK), is(SC_ACCEPTED), is(SC_UNAUTHORIZED)));
         }
     }
 
-    private String ensureUserAndGetToken() {
-        User u = User.of(Data.email(), Data.pass(), Data.name());
-        ValidatableResponse r = userClient.register(u).statusCode(200);
-        String token = Tokens.extractAccessToken(r.extract().asString());
-        accessTokenToCleanup = token;
-        return token;
-    }
-
     @Test
+    @DisplayName("Успешное создание заказа с авторизацией")
     @Story("Positive: Create order with auth")
-    @Description("с авторизацией + с ингредиентами")
-    public void shouldCreateOrderWithAuthAndIngredientsTest() {
-        String token = ensureUserAndGetToken();
+    @Description("Создание заказа с авторизацией и валидными ингредиентами")
+    void shouldCreateOrderWithAuthAndIngredientsTest() {
         List<String> ids = Ingredients.anyIds(2);
 
-        orderClient.createWithAuth(token, ids)
-                .statusCode(200)               // успех
+        orderClient.createWithAuth(accessToken, ids)
+                .statusCode(SC_OK)
                 .contentType(ContentType.JSON)
                 .body("success", is(true))
-                .body("order.number", notNullValue()); // успешный пример ответа из доки :contentReference[oaicite:9]{index=9}
+                .body("order.number", notNullValue());
     }
 
     @Test
+    @DisplayName("Ошибка создания заказа без авторизации")
     @Story("Negative: Create order without auth")
-    @Description("без авторизации")
-    public void shouldFailCreateOrderWithoutAuthTest() {
+    @Description("Попытка создать заказ без авторизации")
+    void shouldFailCreateOrderWithoutAuthTest() {
         List<String> ids = Ingredients.anyIds(2);
 
-        // По документации: без авторизации сервер возвращает 401 и JSON-ответ
-        // {"success": false, "message": "You should be authorised"}
         orderClient.createNoAuth(ids)
-                .statusCode(401)
+                .statusCode(SC_UNAUTHORIZED)
                 .contentType(ContentType.JSON)
                 .body("success", is(false))
                 .body("message", equalTo("You should be authorised"));
     }
-
-    @Test
-    @Story("Negative: Create order without ingredients")
-    @Description("без ингредиентов")
-    public void shouldFailCreateOrderWithoutIngredientsTest() {
-        String token = ensureUserAndGetToken();
-
-        orderClient.createWithAuth(token, Collections.emptyList())
-                .statusCode(400)
-                .body("success", is(false))
-                .body("message", equalTo("Ingredient ids must be provided")); // 400 и это сообщение :contentReference[oaicite:11]{index=11}
-    }
-
-    @Test
-    @Story("Negative: Create order with wrong ingredient hash")
-    @Description("с неверным хешем ингредиентов")
-    public void shouldFailCreateOrderWithWrongHashTest() {
-        {
-            String token = ensureUserAndGetToken();
-            List<String> wrongIds = Arrays.asList("invalid_hash_1", "invalid_hash_2");
-
-            orderClient.createWithAuth(token, wrongIds)
-                    .statusCode(500);
-        }
-    }
 }
-

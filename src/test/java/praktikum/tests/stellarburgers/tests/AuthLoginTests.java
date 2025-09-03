@@ -1,54 +1,78 @@
 package praktikum.tests.stellarburgers.tests;
 
-
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
+import io.qameta.allure.junit5.AllureJunit5;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import io.restassured.http.ContentType;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import praktikum.tests.stellarburgers.BaseTest;
 import praktikum.tests.stellarburgers.client.UserClient;
 import praktikum.tests.stellarburgers.model.User;
 import praktikum.tests.stellarburgers.util.Data;
 import praktikum.tests.stellarburgers.util.Tokens;
-import io.qameta.allure.junit4.AllureJunit4;
-import org.junit.runner.RunWith;
 
 import static org.hamcrest.Matchers.*;
+import static org.apache.http.HttpStatus.*;
 
-
+@ExtendWith(AllureJunit5.class)
 public class AuthLoginTests extends BaseTest {
     private final UserClient userClient = new UserClient();
     private String accessTokenToCleanup;
+    private User testUser;
 
-    @After
-    public void cleanup() {
+    @BeforeEach
+    void setUp() {
+        testUser = User.of(Data.email(), Data.pass(), Data.name());
+        accessTokenToCleanup = Tokens.extractAccessToken(
+                userClient.register(testUser).statusCode(SC_OK).extract().asString()
+        );
+    }
+
+    @AfterEach
+    void cleanup() {
         if (accessTokenToCleanup != null) {
-            userClient.delete(accessTokenToCleanup).statusCode(anyOf(is(200), is(202), is(401)));
+            userClient.delete(accessTokenToCleanup)
+                    .statusCode(anyOf(is(SC_OK), is(SC_ACCEPTED), is(SC_UNAUTHORIZED)));
         }
     }
 
     @Test
+    @DisplayName("Успешный вход с корректными данными")
     @Story("Positive: Successful login")
-    @Description("вход под существующим пользователем")
-    public void shouldLoginExistingUserTest() {
-        User u = User.of(Data.email(), Data.pass(), Data.name());
-        accessTokenToCleanup = Tokens.extractAccessToken(userClient.register(u).statusCode(200).extract().asString());
-
-        userClient.login(u.email, u.password)
-                .statusCode(200)
+    @Description("Успешный вход под существующим пользователем")
+    void shouldLoginExistingUserTest() {
+        userClient.login(testUser.email, testUser.password)
+                .statusCode(SC_OK)
                 .contentType(ContentType.JSON)
                 .body("success", is(true))
-                .body("user.email", equalTo(u.email)); // успешный логин возвращает пользователя и токены :contentReference[oaicite:7]{index=7}
+                .body("user.email", equalTo(testUser.email));
     }
 
     @Test
-    @Story("Negative: Wrong credentials")
-    @Description("вход с неверным логином и паролем")
-    public void shouldFailLoginWithWrongCredsTest() {
-        userClient.login("wrong_"+Data.email(), "wrong_"+Data.pass())
-                .statusCode(401)
+    @DisplayName("Ошибка входа с неверным email")
+    @Story("Negative: Wrong email")
+    @Description("Попытка входа с неверным email")
+    void shouldFailLoginWithWrongEmailTest() {
+        userClient.login("wrong_" + testUser.email, testUser.password)
+                .statusCode(SC_UNAUTHORIZED)
+                .contentType(ContentType.JSON)
                 .body("success", is(false))
-                .body("message", equalTo("email or password are incorrect")); // 401 и это сообщение :contentReference[oaicite:8]{index=8}
+                .body("message", equalTo("email or password are incorrect"));
+    }
+
+    @Test
+    @DisplayName("Ошибка входа с неверным паролем")
+    @Story("Negative: Wrong password")
+    @Description("Попытка входа с неверным паролем")
+    void shouldFailLoginWithWrongPasswordTest() {
+        userClient.login(testUser.email, "wrong_" + testUser.password)
+                .statusCode(SC_UNAUTHORIZED)
+                .contentType(ContentType.JSON)
+                .body("success", is(false))
+                .body("message", equalTo("email or password are incorrect"));
     }
 }

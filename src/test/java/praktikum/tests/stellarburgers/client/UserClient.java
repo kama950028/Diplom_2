@@ -2,6 +2,7 @@ package praktikum.tests.stellarburgers.client;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import praktikum.tests.stellarburgers.model.LoginRequest;
 import praktikum.tests.stellarburgers.model.User;
 
 import static io.restassured.RestAssured.given;
@@ -13,21 +14,29 @@ public class UserClient {
 
     @Step("Register user {user.email}")
     public ValidatableResponse register(User user) {
-        return given().body(user).when().post(REGISTER).then();
+        return given()
+                .body(user)
+                .when().post(REGISTER)
+                .then();
     }
 
     @Step("Login user {email}")
     public ValidatableResponse login(String email, String password) {
         return given()
-                .body("{\"email\":\""+email+"\",\"password\":\""+password+"\"}")
-                .when().post(LOGIN).then();
+                .body(LoginRequest.of(email, password))
+                .when().post(LOGIN)
+                .then();
     }
 
     @Step("Delete user via access token")
     public ValidatableResponse delete(String accessToken) {
         return given()
-                .header("Authorization", accessToken) // "Bearer ..."
-                .when().delete(USER).then();
+                .header("Authorization", normalizeToken(accessToken))
+                .when().delete(USER)
+                .then();
+    }
+
+    private String normalizeToken(String token) {
+        return token != null && token.startsWith("Bearer ") ? token : "Bearer " + token;
     }
 }
-
