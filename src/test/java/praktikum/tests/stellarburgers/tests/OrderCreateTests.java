@@ -75,4 +75,31 @@ public class OrderCreateTests extends BaseTest {
                 .body("success", is(false))
                 .body("message", equalTo("You should be authorised"));
     }
+
+    @Test
+    @DisplayName("Ошибка создания заказа: без ингредиентов (с авторизацией)")
+    @Story("Negative: Create order without ingredients")
+    @Description("Попытка создать заказ с авторизацией, но без ингредиентов")
+    void shouldFailCreateOrderWithAuthWithoutIngredientsTest() {
+        orderClient.createWithAuth(accessToken, List.of())
+                .statusCode(SC_BAD_REQUEST)
+                .contentType(ContentType.JSON)
+                .body("success", is(false))
+                .body("message", equalTo("Ingredient ids must be provided"));
+    }
+
+    @Test
+    @DisplayName("Ошибка создания заказа: неверный хэш ингредиента (с авторизацией)")
+    @Story("Negative: Create order with invalid ingredient hash")
+    @Description("Попытка создать заказ с авторизацией и некорректным id ингредиента")
+    void shouldFailCreateOrderWithInvalidIngredientHashTest() {
+        List<String> invalidIds = List.of("ffffffffffffffffffffffff");
+
+        orderClient.createWithAuth(accessToken, invalidIds)
+                .statusCode(SC_INTERNAL_SERVER_ERROR)
+                .contentType(ContentType.JSON)
+                .body("success", is(false));
+    }
+
+
 }

@@ -23,13 +23,11 @@ buildNumber.properties
 
 # JaCoCo / Allure
 *.exec
-allure-results/
-!allure-report/
 
+# Разрешаем target/allure-results/
+!target/allure-results/
+!target/allure-results/**
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Allure
-.allure/
